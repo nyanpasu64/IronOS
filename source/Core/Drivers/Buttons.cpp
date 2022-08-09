@@ -26,10 +26,8 @@ ButtonState getButtonState() {
   static bool       longPressed         = false;
   static TickType_t previousStateChange = 0;
   const TickType_t  timeout             = TICKS_100MS * 4;
-  uint8_t           currentState;
-  currentState = (getButtonA()) << 0;
-  currentState |= (getButtonB()) << 1;
 
+  const uint8_t    currentState = (getButtonA() << 0) | (getButtonB() << 1);
   const TickType_t tickCount = xTaskGetTickCount();
 
   if (currentState)
