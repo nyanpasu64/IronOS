@@ -30,12 +30,14 @@ ButtonState getButtonState() {
   currentState = (getButtonA()) << 0;
   currentState |= (getButtonB()) << 1;
 
+  const TickType_t tickCount = xTaskGetTickCount();
+
   if (currentState)
-    lastButtonTime = xTaskGetTickCount();
+    lastButtonTime = tickCount;
   if (currentState == previousState) {
     if (currentState == 0)
       return BUTTON_NONE;
-    if ((xTaskGetTickCount() - previousStateChange) >= timeout) {
+    if ((tickCount - previousStateChange) >= timeout) {
       // User has been holding the button down
       // We want to send a button is held message
       longPressed = true;
@@ -74,7 +76,7 @@ ButtonState getButtonState() {
       previousState = 0;
       longPressed   = false;
     }
-    previousStateChange = xTaskGetTickCount();
+    previousStateChange = tickCount;
     return retVal;
   }
   return BUTTON_NONE;
