@@ -501,8 +501,10 @@ static void gui_solderingMode(uint8_t jumpToSleep) {
       switch (buttons) {
       case BUTTON_BOTH:
       case BUTTON_B_LONG:
-      case BUTTON_B_SHORT:
         return; // exit on back press/hold
+      case BUTTON_B_SHORT:
+        boostModeOn = false;
+        break;
       case BUTTON_F_LONG: {
         uint16_t oldTemp = getSettingValue(SettingsOptions::SolderingTemp);
         gui_solderingTempAdjust(); // goto adjust temp mode
