@@ -478,7 +478,7 @@ static void gui_solderingMode(uint8_t jumpToSleep) {
         warnUser(translatedString(Tr->UnlockingKeysString), TICKS_SECOND);
         break;
       case BUTTON_F_SHORT:
-        // if boost mode is enabled turn it on
+        // if boosting isn't disabled in locked mode, turn it on
         if (getSettingValue(SettingsOptions::BoostTemp) && (getSettingValue(SettingsOptions::LockingMode) == 1)) {
           boostModeOn = true;
           lastBoostTime = tickCount;
